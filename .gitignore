@@ -1,2 +1,6 @@
 /.ansible_vault_password
 /main.retry
+.DS_Store
+*.pem
+id_rsa
+secrets
