@@ -7,9 +7,13 @@ ANSIBLE_VERBOSE                 := -vv
 ANSIBLE_VAULT_PASSWORD_FILE     := $(ANSIBLE_DIRECTORY)/.ansible_vault_password
 ANSIBLE_SENSITIVE_CONTENT_FILES := \
   $(ANSIBLE_ROLES_DIRECTORY)/ssh-keys/files/id_rsa \
+  $(ANSIBLE_ROLES_DIRECTORY)/ssh-keys/files/id_rsa.pub \
   $(ANSIBLE_ROLES_DIRECTORY)/s3cmd/files/.s3cfg \
   $(ANSIBLE_ROLES_DIRECTORY)/dotfiles/vars/environment.yml \
-  $(ANSIBLE_ROLES_DIRECTORY)/prey/vars/api_key.yml
+  $(ANSIBLE_ROLES_DIRECTORY)/prey/vars/api_key.yml \
+  $(ANSIBLE_ROLES_DIRECTORY)/aws-credentials/files/.aws/credentials \
+  $(ANSIBLE_ROLES_DIRECTORY)/aws-credentials/files/.aws/config
+
 
 ANSIBLE_COMMAND := \
 	ansible-playbook $(ANSIBLE_VERBOSE) \
@@ -63,3 +67,9 @@ decrypt:
 
 encrypt_pre_commit: encrypt
 	@git add $(ANSIBLE_SENSITIVE_CONTENT_FILES)
+
+list-secrets:
+	echo ${ANSIBLE_SENSITIVE_CONTENT_FILES} | xargs -n 1 ls
+
+show-secrets:
+	echo ${ANSIBLE_SENSITIVE_CONTENT_FILES} | xargs -n 1 create
