@@ -1,5 +1,7 @@
 # macbook-playbook
 
+[![GuardRails badge](https://badges.production.guardrails.io/bennythejudge/macbook-playbook.svg)](https://www.guardrails.io)
+
 Automatically prepare a Macbook for development and desktop tasks using Ansible.
 
 ## Last tested on
